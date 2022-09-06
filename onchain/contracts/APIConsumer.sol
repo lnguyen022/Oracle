@@ -15,7 +15,7 @@ import '@chainlink/contracts/src/v0.8/ConfirmedOwner.sol';
  * DO NOT USE THIS CODE IN PRODUCTION.
  */
 
-contract APIConsumer is ChainlinkClient, ConfirmedOwner {
+contract APIConsumer1 is ChainlinkClient, ConfirmedOwner {
     using Chainlink for Chainlink.Request;
 
     uint256 public rank;
@@ -42,7 +42,7 @@ contract APIConsumer is ChainlinkClient, ConfirmedOwner {
      * Create a Chainlink request to retrieve API response, find the target
      * data, then multiply by 1000000000000000000 (to remove decimal places from data).
      */
-    function requestRanking(string memory _playerId) public returns (bytes32 requestId) {
+    function requestRanking() public returns (bytes32 requestId) {
         Chainlink.Request memory req = buildChainlinkRequest(jobId, address(this), this.fulfill.selector);
 
         // Set the URL to perform the GET request on
@@ -59,7 +59,7 @@ contract APIConsumer is ChainlinkClient, ConfirmedOwner {
         //   }
         //  }
         // request.add("path", "RAW.ETH.USD.VOLUME24HOUR"); // Chainlink nodes prior to 1.0.0 support this format
-        req.add('playerId', _playerId); // Chainlink nodes 1.0.0 and later support this format
+        req.add("playerId", "Frosty"); // Chainlink nodes 1.0.0 and later support this format
         // Sends the request
         return sendChainlinkRequest(req, fee);
     }
